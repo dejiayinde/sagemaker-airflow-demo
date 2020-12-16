@@ -1,0 +1,6 @@
+{
+    "BUCKET_PREFIX": "hbomax-datascience-deployment",
+    "S3_PREFIX": "lifecycle/paid-renewal-daily-model/staging",
+    "BUCKET_PREFIX_BRAZE": "hbo-dap-dcm",
+    "S3_PREFIX_BRAZE": "hbomax/paid-renewal-model"
+}

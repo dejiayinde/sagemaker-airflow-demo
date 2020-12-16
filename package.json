@@ -1,0 +1,244 @@
+{
+  "name": "@HBOCodeLabs/sagemaker-airflow",
+  "private": true,
+  "branches": ["production"],
+  "tagFormat": "v${version}",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HBOCodeLabs/sagemaker-airflow.git"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@semantic-release/commit-analyzer": "^8.0.0",
+    "@semantic-release/error": "^2.2.0",
+    "@semantic-release/github": "^7.0.0",
+    "@semantic-release/npm": "^7.0.0",
+    "@semantic-release/release-notes-generator": "^9.0.0",
+    "env-ci": "^5.0.2",
+    "semantic-release-slack-bot": "^1.6.2"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "plugins": [
+     [ "@semantic-release/commit-analyzer", {
+      "preset": "conventionalcommits",
+      "releaseRules": [
+          {"breaking": true, "release": "major"},
+          {"revert": true, "release": "patch"},
+          {"type": "major", "release": "major"},
+          {"type": "minor", "release": "minor"},
+          {"type": "patch", "release": "patch"},
+          {"type": "docs", "release": "patch"},
+          {"type": "refactor", "release": "patch"}
+      ],
+      "presetConfig": {
+        "types": [
+          {"type": "major", "section": "New Features", "hidden": false},
+          {"type": "minor", "section": "Performance Improvements", "hidden": false},
+          {"type": "patch", "section": "Bug Fixes", "hidden": false},
+          {"type": "docs", "section": "Docs", "hidden": false},
+          {"type": "refactor", "section": "Refactor", "hidden": false}
+        ]
+      }
+    }],
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": "package.json"
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "minor",
+                "section": "Performance Improvements"
+              },
+              {
+                "type": "patch",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "major",
+                "section": "New Features"
+              },
+              {
+                "type": "build",
+                "section": "Build"
+              },
+              {
+                "type": "refactor",
+                "section": "Refactor"
+              }
+            ]
+          }
+        }
+      ],
+      [
+        "semantic-release-slack-bot",
+        {
+          "notifyOnSuccess": true,
+          "notifyOnFail": true,
+          "markdownReleaseNotes": true,
+          "onSuccessTemplate": {
+            "username": "DAP-SEMVER-BOT",
+            "channel": "ci-personalization-alerts",
+            "icon_emoji": ":rocket:",
+            "attachments": [
+              {
+                "title": "Deployment $package_name :package:",
+                "title_link": "$jenkins_build_url",
+                "text": "A new version has been released. :awsgreen:",
+                "mrkdwn_in": [
+                  "fields"
+                ],
+                "fields": [
+                  {
+                    "title": "Branch",
+                    "value": "$branch",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Version",
+                    "value": "$npm_package_version",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Notes",
+                    "value": "$release_notes",
+                    "short": false
+                  }
+                ]
+              }]},
+
+              "onFailTemplate": {
+              "username": "DAP-SEMVER-BOT",
+              "channel": "ci-personalization-alerts",
+              "icon_emoji": ":rocket:",
+              "attachments": [
+              {
+                "title": "Failed Deployment $package_name :awsred:",
+                "title_link": "$repo_url",
+                "text": "Deployment has failed.",
+                "mrkdwn_in": [
+                  "fields"
+                ],
+                "fields": [
+                  {
+                    "title": "Branch",
+                    "value": "$branch",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Notes",
+                    "value": "$release_notes",
+                    "short": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+	  [
+        "semantic-release-slack-bot",
+        {
+          "notifyOnSuccess": true,
+          "notifyOnFail": true,
+          "markdownReleaseNotes": true,
+          "onSuccessTemplate": {
+            "username": "DAP-SEMVER-BOT",
+            "channel": "data-science-alerts",
+            "icon_emoji": ":rocket:",
+            "attachments": [
+              {
+                "title": "Deployment $package_name :package:",
+                "title_link": "$jenkins_build_url",
+                "text": "A new version has been released. :awsgreen:",
+                "mrkdwn_in": [
+                  "fields"
+                ],
+                "fields": [
+                  {
+                    "title": "Branch",
+                    "value": "$branch",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Version",
+                    "value": "$npm_package_version",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Notes",
+                    "value": "$release_notes",
+                    "short": false
+                  }
+                ]
+              }]},
+
+              "onFailTemplate": {
+              "username": "DAP-SEMVER-BOT",
+              "channel": "data-science-alerts",
+              "icon_emoji": ":rocket:",
+              "attachments": [
+              {
+                "title": "Failed Deployment $package_name :awsred:",
+                "title_link": "$repo_url",
+                "text": "Deployment has failed.",
+                "mrkdwn_in": [
+                  "fields"
+                ],
+                "fields": [
+                  {
+                    "title": "Branch",
+                    "value": "$branch",
+                    "short": true
+                  },
+                  {
+                    "title": "Release Notes",
+                    "value": "$release_notes",
+                    "short": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}
+
