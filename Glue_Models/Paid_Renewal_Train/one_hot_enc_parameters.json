@@ -1,7 +1,0 @@
-{
-    "S3_BUCKET_PREFIX": "hbomax-datascience-deployment",
-    "S3_PREFIX": "lifecycle/paid-renewal-daily-model",
-    "ONEHOT_COLS": "['PROVIDER','FIRST_WATCHED_ASSET_CLASS_SUB_ADJ','SUBSCRIBER_TYPE','MEDIA_SOURCE','SERIES_VIEWING_CAT_LABEL']",
-    "DROP_COLS": "['HBO_UUID']",
-    "LABEL_COL": "FLG_TARGET"
-}
