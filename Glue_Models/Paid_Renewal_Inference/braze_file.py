@@ -2,7 +2,7 @@
 import sys
 import os
 from datetime import datetime
-import boto3
+#import boto3
 
 #Import pyspark modules
 from pyspark.context import SparkContext
